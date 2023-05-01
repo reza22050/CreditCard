@@ -1,0 +1,31 @@
+<div class="columns">
+<div class="column">
+ <app-card [name]="f.get('name')?.value" 
+ [cardNumber]="f.get('cardNumber')?.value"
+ [expiration]="f.get('expiredDate')?.value"
+ ></app-card> 
+</div>
+<div class="column">
+
+<form [formGroup]="cardForm" (submit)="submitForm()">
+    <app-input [type]="'text'" [label]="'Name'" [control]="$any(cardForm).get('name')" [placeholder]="'Please enter name'"></app-input>
+    <app-input [type]="'text'" [label]="'Card Number'" [control]="$any(cardForm).get('cardNumber')" ></app-input>
+    <div class="columns">
+        <div class="column">
+            <app-input [type]="'date'" [label]="'Expired Date'" [control]="$any(cardForm).get('expiredDate')" ></app-input>
+        </div>
+        <div class="column">
+            <app-input [type]="'number'" [label]="'Security Code'" [control]="$any(cardForm).get('securityCode')" ></app-input>
+        </div>
+    </div>
+
+    <button [disabled]="cardForm.invalid" type="submit" class="button is-success is-small mt-4">Submit</button>
+    <button [disabled]="!cardForm.dirty" type="submit" class="button is-warning is-small mt-4" (click)="onResetForm()">Reset</button>
+</form>
+</div>
+</div>
+<!-- form content: {{cardForm.value | json}} <br/>
+form is valid: {{cardForm.valid | json}} <br/>
+form error: {{cardForm.get('name')?.errors | json}} <br/>
+FORM VALUES: {{f.get('name')?.value}} -->
+
